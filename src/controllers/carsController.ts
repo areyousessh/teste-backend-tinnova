@@ -1,7 +1,11 @@
 import { Request, Response } from "express";
 import { prismaClient } from "../database/prismaClient";
-
+  
 export class createCarsController {
+    validateCarBrand(validBrands: string[], brand: string): boolean {
+        const lowercaseBrand = brand.toLowerCase();
+        return validBrands.includes(lowercaseBrand);
+      }
     async handle (req: Request, res: Response) {
         try {
             const {veiculo, marca, ano, descricao, vendido} = req.body;
@@ -26,6 +30,10 @@ export class createCarsController {
 }
 
 export class updateCarsController {
+    validateCarBrand(validBrands: string[], brand: string): boolean {
+        const lowercaseBrand = brand.toLowerCase();
+        return validBrands.includes(lowercaseBrand);
+      }
     async handle (req: Request, res: Response) {
         try {
             const {id} = req.params
